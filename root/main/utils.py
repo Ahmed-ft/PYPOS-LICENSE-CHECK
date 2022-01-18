@@ -3,11 +3,6 @@
 from datetime import datetime
 from pytz import timezone
 
-# e-mail
-
-from flask_mail import Message
-from flask import url_for
-
 # random string (modules)
 
 import re
@@ -182,21 +177,3 @@ def localTime():
     local = pytz.utc.localize(utc, is_dst=None).astimezone(tz)
 
     return local
-
-# send confirm e-mail ( or send pin to e mail to get token )
-
-
-def send_confirm_email_token(user):
-
-    from root import mail
-
-    token = user.get_reset_token()
-
-    msg = Message('Confirm E-mail',
-                  sender='noreply',
-                  recipients=[user.email])
-    msg.body = f'''To reset your password, visit the following link:
-                {url_for('users.reset_token', token=token, _external=True)}
-                If you did not make this request then simply ignore this email and no changes will be made.
-                '''
-    mail.send(msg)

@@ -50,6 +50,12 @@ def create_admin():
 @main.route('/generate_keys')
 def generate_keys():
 
+    keys = LicenseKey.query.first()
+
+    if keys:
+
+        return 'KEYS EXISTS.'
+
     counter = 1
 
     while counter < 100:
@@ -63,7 +69,6 @@ def generate_keys():
         counter+=1
 
     print('GENERATING LICENSE KEYS >> DONE')
-
     return 'GENERATING LICENSE KEYS >> DONE'
 
 # REMOVE WHEN DONE
@@ -89,13 +94,6 @@ def login():
     if current_user.is_authenticated:
 
         return f'{current_user.username} IS ALREADY LOGGED IN.'
-
-    # username = request.args.get('u')
-    # password = request.args.get('p')
-
-    # if not username or not password:
-
-    #     return 'MISSING CREDINTIALS.'
 
     if request.method == 'POST':
 
@@ -133,7 +131,6 @@ def list_regs():
 
     return render_template("/main/list_regs.html", regs=regs)
 
-
 # verify license for device (TOKEN REQUIRED)
 
 @main.route('/api/verify_license', methods=['POST'])
@@ -164,7 +161,7 @@ def verify_license():
         if is_registered_device: # <-------- [ ALREADY REGISTERED ] [ R-1 ]
 
             print('ALREADY REGISTERED.')
-            return 'ALREADY REGISTERED.'
+            return 'R-1'
 
         else: # <-------- [ NOT REGISTERED ]
 
@@ -175,7 +172,7 @@ def verify_license():
             if valid_license.status == 'USED': # <-------- [ USED LICENSE ] [ R-2 ]
 
                 print('USED LICENSE.')
-                return 'LICENSE IS USED BY ANOTHER DEVICE. GET A NEW ONE.'
+                return 'R-2'
 
             else: # LICENSE STATUS == NEW
 
@@ -190,9 +187,9 @@ def verify_license():
                 db.session.commit()
 
                 print('DEVICE REGISTERED SUCCESSFULLY.')
-
-                return 'DEVICE REGISTERED SUCCESSFULLY.' # <-------- [ DEVICE REGISTERED SUCCESSFULLY ] [ R-3 ]
+                return 'R-3' # <-------- [ DEVICE REGISTERED SUCCESSFULLY ] [ R-3 ]
 
     else:
         
-        return 'LICENSE NOT VALID.' # <-------- [ LICENSE NOT VALID ] [ R-4 ]
+        print('LICENSE NOT VALID.')
+        return 'R-4' # <-------- [ LICENSE NOT VALID ] [ R-4 ]
