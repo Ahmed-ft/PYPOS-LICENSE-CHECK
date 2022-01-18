@@ -1,0 +1,504 @@
+
+/* default font size == 16px */
+
+:root {
+    --primary-blue: #0984e3;
+    --light-blue: #0985e31a;
+    --light-gray: #8080800e;
+    --dark-gray: #3B3E49;
+    --bcd-green: #057550;
+    --bcd-light-green: #B1D1BA;
+    --transparent-dark: #3b3e499f;
+    --transparent-light: #5e616a75;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    color: #000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+* {
+    list-style: none;
+    font-family: Markazi !important;
+    outline: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: Markazi;
+    src: url("/static/fonts/Markazi_Text/MarkaziText-Medium.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: Monoton;
+    src: url("/static/fonts/Monoton/Monoton-Regular.ttf") format("opentype");
+}
+
+/* dropdown start */
+
+/* The container must be positioned relative: */
+
+.custom-select {
+    position: relative;
+    font-family: Arial;
+}
+
+.custom-select select {
+    display: none;
+    /*hide original SELECT element: */
+}
+
+.select-selected {
+    background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* dropdown end */
+
+
+/* scroll ///////////////////////////////////////////////////////////// */
+
+::-webkit-scrollbar {
+    width: 0.44rem !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: rgba(128, 128, 128, 0.404) !important;
+}
+
+/* scroll end ///////////////////////////////////////////////////////////// */
+
+.exit_btn {
+    background-color: #971d2a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    padding: 3px;
+    width: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.exit_btn:hover {
+    box-shadow: unset !important;
+}
+
+/* hide increment arrows  */
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+/* ///////////////////////////////////////////////////////////// */
+
+span {
+    cursor: default;
+}
+
+input,
+textarea {
+    direction: rtl !important;
+}
+
+input {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer !important;
+    background-color: transparent;
+    border: none;
+}
+
+.go_back {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: rgba(255, 255, 255, 0.651);
+    padding: 5px 20px;
+    width: 100px;
+    color: black;
+    font-size: 25px;
+    border-radius: 4px;
+}
+
+/* shortcuts */
+
+.box-shadow {
+    box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.42);
+    -webkit-box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.42);
+    -moz-box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.42);
+}
+
+/* alert */
+
+.alert {
+    height: 50px !important;
+    width: 40%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.alert button {
+    margin-left: auto;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.alert-secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border: solid 1px;
+    border-color: gray;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-dark {
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
+}
+
+/* ALERT END /////////// */
+
+.dn {
+    display: none !important;
+}
+
+.spaceB {
+    margin: 0 3px;
+}
+
+/* BACKGROUND START */
+
+.bg_none {
+    background-color: transparent !important;
+}
+
+.bg_green {
+    background-color: #6AA641 !important;
+    color: white;
+}
+
+/* BACKGROUND END */
+
+/* BORDER START */
+
+.bred {
+    border: red solid 1px;
+}
+
+.byellow {
+    border: yellow solid 1px;
+}
+
+.bgreen {
+    border: green solid 1px;
+}
+
+.bblue {
+    border: blue solid 1px;
+}
+
+.bpurple {
+    border: purple solid 1px;
+}
+
+/* BORDER END */
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bottom_center {
+    position: absolute;
+    bottom: 0;
+    height: 170px !important;
+    width: 70% !important;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+}
+
+.wh100 {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.w100 {
+    width: 100% !important;
+}
+
+.h100 {
+    height: 100% !important;
+}
+
+/* FLEX START */
+
+/* column */
+.flex-c-c-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-c-c-se {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.flex-c-c-fe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.flex-c-c-fs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* row */
+.flex-c-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-c-se {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.flex-c-fs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.flex-c-fe {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.flex-c-sb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* FLEX END //////////////// */
+
+/* BTN START */
+
+/* clicked effect */
+a,
+button,
+input[type='submit'] {
+    /* right/ bottom/  */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+a:active,
+button:active,
+input[type='submit']:active {
+    box-shadow: 0 5px rgba(128, 128, 128, 0.349);
+    transform: translateY(2px);
+}
+
+.btn {
+    border: none;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0 10px;
+    margin: 0 10px;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    white-space: nowrap;
+}
+
+.green_btn {
+    background-color: green;
+}
+
+.red_btn {
+    background-color: #fd4744b2;
+}
+
+.trans_btn {
+    border: #ffffff7c solid 1px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.123);
+}
+
+.blue_btn {
+    background-color: #0985e3dc;
+}
+
+.green_btn:hover {
+    background-color: rgba(0, 128, 0, 0.685);
+}
+
+.blue_btn:hover {
+    background-color: #0985e3b7;
+}
+
+.logout:hover {
+    background-color: #f0322f86 !important;
+    border: transparent solid 1px;
+}
+
+.trans_btn:hover {
+    background-color: rgba(255, 255, 255, 0.226);
+}
+
+/* BTN END //////////////// */
+
+@media print {
+    body {
+        background-image: none;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .noprint {
+        visibility: hidden !important;
+        display: none !important;
+    }
+
+    .print {
+        display: flex !important;
+    }
+}

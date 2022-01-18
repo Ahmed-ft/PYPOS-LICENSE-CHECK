@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>P.L.C.A - INDEX</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/init.css') }}">
+
+</head>
+
+<body>
+
+    <div class="box-shadow flex-c-se" style="width: 95%; height: 80%;">
+
+        <div class="nav-links bred wh100">
+            <a href="{{ url_for('main.list_keys') }}">LIST KEYS</a>
+            <a href="{{ url_for('main.list_regs') }}">LIST REGISTRIES</a>
+            <a href="{{ url_for('main.gen_keys') }}">GENERATE KEYS</a>
+        </div>
+
+        <div class="nav-links-results bblue wh100">
+            
+        </div>
+
+    </div>
+
+</body>
+
+</html>
