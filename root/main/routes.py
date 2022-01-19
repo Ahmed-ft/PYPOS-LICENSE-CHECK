@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, request, render_template, redirect, url_for
-from root.main.utils import uuid_url64, get_token, token_required, create_user
-from root import create_app, db, bcrypt
-from root.main.models import DeviceReg, LicenseKey, User
 from flask_login import login_required, login_user, current_user, logout_user
+
+from root import create_app, db, bcrypt
+from root.main.utils import uuid_url64, generate_auth_token, auth_token_required, create_user
+from root.main.models import DeviceReg, LicenseKey, User
 
 main = Blueprint("main", __name__, template_folder="templates")
 
@@ -15,7 +16,7 @@ main = Blueprint("main", __name__, template_folder="templates")
 @main.route('/t')
 def __get_token():
 
-    t = get_token()
+    t = generate_auth_token()
 
     return t
 
@@ -134,7 +135,7 @@ def list_regs():
 # verify license for device (TOKEN REQUIRED)
 
 @main.route('/api/verify_license', methods=['POST'])
-@token_required
+@auth_token_required
 def verify_license():
 
     # SYS INFO

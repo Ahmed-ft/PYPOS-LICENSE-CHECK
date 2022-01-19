@@ -120,7 +120,7 @@ def drop_tbl(class_name, app):
 
 # api token auth
 
-def get_token():
+def generate_auth_token():
 
     try:
 
@@ -136,11 +136,11 @@ def get_token():
         return e
 
 
-def token_required(f):
+def auth_token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
 
-        # http://127.0.0.1:5000/route?t=alshfjfjdklsfj89549834ur
+        # # http://127.0.0.1:5000/route?t=<auth_token>
         token = request.args.get('t')
 
         if not token:
@@ -151,7 +151,7 @@ def token_required(f):
 
             data = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
 
-        except Exception as e:
+        except:
 
             return jsonify({'message': 'Token is invalid!'}), 403
 
