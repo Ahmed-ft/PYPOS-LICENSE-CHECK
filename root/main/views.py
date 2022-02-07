@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_required, login_user, current_user, logout_user
 
 from root import create_app, db, bcrypt
@@ -14,12 +14,24 @@ main = Blueprint("main", __name__, template_folder="templates")
 # REMOVE WHEN DONE
 
 
-@main.route('/t')
+@main.route('/t', methods=['POST']) # <--- JS
 def __get_token():
 
-    t = generate_auth_token()  # <---- UPDATE FROM FLASK SKELETON
+    auth_token_request = request.json['GET_AUTH_TOKEN_5']
 
-    return t
+    if auth_token_request:
+
+        t = generate_auth_token(5)
+
+        return jsonify({
+            'status': t
+        })
+
+    else:
+
+        return jsonify({
+            'status': 'NOT FOUND'
+        })
 
 
 @main.route('/r')
