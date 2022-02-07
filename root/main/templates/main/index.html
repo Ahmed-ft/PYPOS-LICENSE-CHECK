@@ -64,6 +64,18 @@
                 $temp.remove();
             });
 
+            $('#list_keys_toggle').click(function (e) { 
+                e.preventDefault();
+                $('#regs_table_wrpr').css('display', 'none')
+                $('#keys_table_wrpr').css('display', 'flex')
+            });
+
+            $('#list_regs_toggle').click(function (e) { 
+                e.preventDefault();
+                $('#keys_table_wrpr').css('display', 'none')
+                $('#regs_table_wrpr').css('display', 'flex')
+            });
+
         });
 
     </script>
@@ -74,7 +86,7 @@
 
             <div id="regs_table_wrpr" class="wh100" style="overflow-y: auto; display: none;"> <!-- REGS WRPR -->
 
-                <table class="w100"> 
+                <table class="w100" style="height: 30px;"> 
 
                     <tr style="height: 30px;">
 
@@ -144,8 +156,8 @@
 
         <div class="nav-links wh100 flex-c-c-se"> <!-- INNER RIGHT WRPR -->
 
-            <a class="btn blue_btn" style="width: 250px; padding: 0 10px;" href="#">LIST KEYS</a>
-            <a class="btn blue_btn" style="width: 250px; padding: 0 10px;" href="#">LIST REGISTRIES</a>
+            <a id="list_keys_toggle" class="btn blue_btn" style="width: 250px; padding: 0 10px;" href="#">LIST KEYS</a>
+            <a id="list_regs_toggle" class="btn blue_btn" style="width: 250px; padding: 0 10px;" href="#">LIST REGISTRIES</a>
             <a class="btn red_btn" style="width: 250px; padding: 0 10px;" href="{{ url_for('main.reset_db') }}">RESET DB ( DEV OPTION )</a>
         
         </div>

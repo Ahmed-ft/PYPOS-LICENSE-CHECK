@@ -4,7 +4,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_required, login_user, current_user, logout_user
 
 from root import create_app, db, bcrypt
-from root.main.utils import uuid_url64, generate_auth_token, auth_token_required, create_user
+from root.main.utils import uuid_url64, generate_auth_token, auth_token_required, CrudUser
 from root.main.models import DeviceReg, LicenseKey, User
 
 main = Blueprint("main", __name__, template_folder="templates")
@@ -38,7 +38,9 @@ def reset_db():
         db.drop_all()
         db.create_all(app=app)
 
-        create_user('admin', '0000')
+        crud = CrudUser()
+
+        crud.create_user('admin', '0000')
 
         keys = LicenseKey.query.first()
 
