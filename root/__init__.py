@@ -7,7 +7,9 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
+
 login_manager = LoginManager()
+
 login_manager.login_view = 'main.login'
 login_manager.login_message_category = 'info'
 login_manager.login_message = "يرجي تسجيل الدخول"
@@ -23,7 +25,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
 
-    from root.main.routes import main
+    from root.main.views import main
 
     app.register_blueprint(main)
 

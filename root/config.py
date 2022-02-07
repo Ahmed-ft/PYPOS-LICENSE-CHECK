@@ -25,7 +25,7 @@ load_dotenv(path_to_env)
 
 CONFIG_CLASS = 'DEV'
 
-if 'HEROKU' in os.environ: # DEPLOYED ON HEROKU
+if 'DYNO' in os.environ: # DEPLOYED ON HEROKU
 
     CONFIG_CLASS = 'HEROKU'
 

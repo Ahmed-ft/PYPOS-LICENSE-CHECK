@@ -17,23 +17,108 @@
 
     <style>
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         a {
             color: black;
             text-align: center;
         }
 
+        table,
+        th,
+        td {
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        table {
+            width: 90%;
+        }
+
     </style>
 
-    <div class="box-shadow flex-c-se" style="width: 95%; height: 80%;">
+    <div class="box-shadow flex-c-se" style="width: 95%; height: 80%;"> <!-- OUTER WRPR -->
 
-        <div class="nav-links bred wh100">
-            <a href="{{ url_for('main.list_keys') }}">LIST KEYS</a>
-            <a href="{{ url_for('main.list_regs') }}">LIST REGISTRIES</a>
-            <a href="{{ url_for('main.generate_keys') }}">GENERATE KEYS</a>
+        <div class="wh100 flex-c-c"> <!-- INNER LEFT WRPR -->
+
+            <div id="regs_table_wrpr" class="wh100" style="overflow-y: auto; display: none;"> <!-- REGS WRPR -->
+
+                <table class="w100"> 
+
+                    <tr style="height: 30px;">
+                        <th>LICENSEKEY</th>
+                        <th>BASEBOARD_SERIAL_NUMBER</th>
+                        <th>SERIAL_NUMBER</th>
+                        <th>UUID</th>
+                        <th>النشاط</th>
+                    </tr>
+            
+                    {% if regs %}
+            
+                        {% for device in regs %}
+                            
+                            <tr>
+                                <td>{{ device.license_key }}</td>
+                                <td>{{ device.baseboard_serial_number }}</td>
+                                <td>{{ device.serial_number }}</td>
+                                <td>{{ device.uuid }}</td>
+                                <td>{{ device.business_type }}</td>
+                            </tr>
+            
+                        {% endfor %}
+            
+                    {% endif %}
+            
+                </table>
+
+            </div>
+
+            <div id="keys_table_wrpr" class="wh100" style="overflow-y: auto;"> <!-- KEYS WRPR -->
+
+                <table class="w100">
+
+                    <tr style="height: 30px;">
+                        <th>STATUS</th>
+                        <th>LICENSEKEY</th>
+                    </tr>
+            
+                    {% for key in keys %}
+            
+                        {% if key.status == 'USED' %}
+            
+                        <tr style="background-color: red;">
+                            <td>{{ key.status }}</td>
+                            <td>{{ key.key }}</td>
+                        </tr>
+            
+                        {% else %}
+            
+                        <tr>
+                            <td>{{ key.status }}</td>
+                            <td>{{ key.key }}</td>
+                        </tr>
+            
+                        {% endif %}
+                
+                    {% endfor %}
+            
+                </table>
+
+            </div>
+
+            
         </div>
 
-        <div class="nav-links-results bblue wh100">
-            
+        <div class="nav-links wh100 flex-c-c-se"> <!-- INNER RIGHT WRPR -->
+
+            <a class="btn blue_btn" style="width: 250px; padding: 0 10px;" href="#">LIST KEYS</a>
+            <a class="btn blue_btn" style="width: 250px; padding: 0 10px;" href="#">LIST REGISTRIES</a>
+            <a class="btn red_btn" style="width: 250px; padding: 0 10px;" href="{{ url_for('main.reset_db') }}">RESET DB ( DEV OPTION )</a>
+        
         </div>
 
     </div>

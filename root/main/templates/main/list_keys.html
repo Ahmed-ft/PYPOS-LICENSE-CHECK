@@ -48,34 +48,7 @@
 
     </style>
 
-    <table>
 
-        <tr style="height: 30px;">
-            <th>STATUS</th>
-            <th>LICENSEKEY</th>
-        </tr>
-
-        {% for key in keys %}
-
-            {% if key.status == 'USED' %}
-
-            <tr style="background-color: red;">
-                <td>{{ key.status }}</td>
-                <td>{{ key.key }}</td>
-            </tr>
-
-            {% else %}
-
-            <tr>
-                <td>{{ key.status }}</td>
-                <td>{{ key.key }}</td>
-            </tr>
-
-            {% endif %}
-    
-        {% endfor %}
-
-    </table>
 
 </body>
 

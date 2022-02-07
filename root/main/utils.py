@@ -140,8 +140,8 @@ def auth_token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
 
-        # # http://127.0.0.1:5000/route?t=<auth_token>
-        token = request.args.get('t')
+        # # http://127.0.0.1:5000/route?at=<auth_token>
+        token = request.args.get('at')
 
         if not token:
 
