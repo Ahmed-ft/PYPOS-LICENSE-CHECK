@@ -138,7 +138,7 @@ class CrudUser:
             
             return e
 
-    def create_user(self, username, passwd, is_confirmed, is_admin):
+    def create_user(self, username, passwd, is_confirmed=False, is_admin=False):
 
         try:
 
