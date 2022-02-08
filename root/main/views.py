@@ -13,9 +13,17 @@ main = Blueprint("main", __name__, template_folder="templates")
 # REMOVE WHEN DONE
 # REMOVE WHEN DONE
 
-@main.route('/test', methods=['POST'])
+@main.route('/test', methods=['POST', 'GET'])
 @auth_token_required
 def tests():
+
+    if request.method == 'GET':
+
+        u = User.query.all()
+
+        for i in u:
+
+            print(i)
 
     return 'SUCCESS'
 
