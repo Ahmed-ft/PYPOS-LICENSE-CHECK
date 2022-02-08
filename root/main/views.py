@@ -57,20 +57,10 @@ def reset_db():
 
     try:
 
-        if current_user.is_authenticated:
-
-            logout_user()
-            print('CURRENT USER LOGGED OUT.')
-            return redirect(request.referrer)
-
         app = create_app()
 
         db.drop_all()
         db.create_all(app=app)
-
-        crud = CrudUser()
-
-        crud.create_user('admin', '0000')
 
         keys = LicenseKey.query.first()
 
@@ -89,6 +79,11 @@ def reset_db():
             db.session.commit()
 
             counter += 1
+
+        admin = User(username='admin', password='0000', is_confirmed=False, is_admin=True)
+
+        db.session.add(admin)
+        db.session.commit()
 
         print('DB RESET >> DONE')
         print('CREATE ADMIN >> DONE')
