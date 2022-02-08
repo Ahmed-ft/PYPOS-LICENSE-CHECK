@@ -13,6 +13,11 @@ main = Blueprint("main", __name__, template_folder="templates")
 # REMOVE WHEN DONE
 # REMOVE WHEN DONE
 
+@main.route('/test', methods=['POST'])
+@auth_token_required
+def tests():
+
+    return 'SUCCESS'
 
 @main.route('/t', methods=['POST']) # <--- JS
 def __get_token():

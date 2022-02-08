@@ -197,8 +197,7 @@ def generate_auth_token(exp=None):
 
     """
 
-    generate_auth_token() >> generates authentication token encoded with same data as in generate_auth_token() in POS
-    so the token can be decoded in both PYPOS-LICENSE-CHECK / POS
+    generate_auth_token() >> generates authentication token encoded with same X in POS generate_auth_token()
 
     :param1[int] exp: token expiry duration.
 
@@ -215,8 +214,8 @@ def generate_auth_token(exp=None):
 
         if exp: # <--- WITH EXPIRY
 
-            token = jwt.encode({'user': 'license_check_api', 'exp': datetime.datetime.utcnow(
-            ) + datetime.timedelta(minutes=exp)}, Config.SECRET_KEY) 
+            token = jwt.encode({'xxx': 'xxx', 'exp': datetime.datetime.utcnow(
+            ) + datetime.timedelta(minutes=exp)}, Config.MUTUAL_KEY) 
 
             return token
 
@@ -227,20 +226,49 @@ def generate_auth_token(exp=None):
 
         else: # <--- WITHOUT EXPIRY
 
-            token = jwt.encode({'user': 'license_check_api'}, Config.SECRET_KEY)
+            token = jwt.encode({'xxx': 'xxx'}, Config.MUTUAL_KEY)
 
             return token
-
-            # return jsonify({
-            #     "token": token,
-            #     "expires in": "no expiry"
-            #     })
 
     except Exception as e:
 
         print_exception(e)
 
         return '*** EXCEPTION --> CHECK LOGS FOR DETAILES.'
+
+# REQUIRE AUTH TOKEN TO INTEREACT WITH API ENDPOINTS.
+
+def auth_token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+
+        from root.config import Config
+
+        from flask import jsonify, request
+
+        import jwt
+
+        # http://127.0.0.1:5000/endpoint?at=alshfjfjdklsfj89549834ur
+
+        token = request.args.get('at') # at ( auth token )
+
+        if not token:
+
+            return jsonify({'message': 'Token is missing!'}), 403
+
+        try:
+
+            data = jwt.decode(token, Config.MUTUAL_KEY, algorithms=["HS256"])
+
+        except Exception as e:
+
+            print_exception(e)
+
+            return jsonify({'EXCEPTION': 'CHECK LOGS FOR MORE DETAILES.'}), 403
+
+        return f(*args, **kwargs)
+
+    return decorated
 
 # REQUIRE CURRENT USER TO HAVE ADMIN ROLE.
 
@@ -272,39 +300,6 @@ def admin_role_required(f):
 
     return decorated
 
-# REQUIRE AUTH TOKEN TO INTEREACT WITH API ENDPOINTS.
-
-def auth_token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-
-        from root.config import Config
-
-        from flask import jsonify, request
-
-        import jwt
-
-        # http://127.0.0.1:5000/endpoint?at=alshfjfjdklsfj89549834ur
-
-        token = request.args.get('at') # at ( auth token )
-
-        if not token:
-
-            return jsonify({'message': 'Token is missing!'}), 403
-
-        try:
-
-            data = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
-
-        except Exception as e:
-
-            print_exception(e)
-
-            return jsonify({'EXCEPTION': 'CHECK LOGS FOR MORE DETAILES.'}), 403
-
-        return f(*args, **kwargs)
-
-    return decorated
 
 # GENERATE UNIQUE STRING.
 

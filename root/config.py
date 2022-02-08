@@ -33,6 +33,7 @@ if 'DYNO' in os.environ: # DEPLOYED ON HEROKU
 
         TEMPLATES_AUTO_RELOAD = True
         SECRET_KEY = os.environ.get('SECRET_KEY')
+        MUTUAL_KEY = os.environ.get('MUTUAL_KEY') # VER / POS
         SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
         
         SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -43,6 +44,7 @@ else: # DEV CLASS
 
         TEMPLATES_AUTO_RELOAD = True
         SECRET_KEY = os.environ.get('SECRET_KEY')
+        MUTUAL_KEY = os.environ.get('MUTUAL_KEY')
         SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
 
         SQLALCHEMY_TRACK_MODIFICATIONS = False
