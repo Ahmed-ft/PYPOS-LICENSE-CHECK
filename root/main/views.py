@@ -80,10 +80,9 @@ def reset_db():
 
             counter += 1
 
-        admin = User(username='admin', password='0000', is_confirmed=False, is_admin=True)
+        crud = CrudUser()
 
-        db.session.add(admin)
-        db.session.commit()
+        crud.create_user('admin', '0000')
 
         print('DB RESET >> DONE')
         print('CREATE ADMIN >> DONE')

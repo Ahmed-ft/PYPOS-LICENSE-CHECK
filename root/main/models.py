@@ -13,10 +13,17 @@ class User(db.Model, UserMixin):
     __tabelname__ = 'user'
     
     id = db.Column(db.Integer, primary_key=True)
-
-    username = db.Column(db.String(20), unique=True)
-    password = db.Column(db.String(100))
+    uuid = db.Column(db.String, unique=True)
     
+    username = db.Column(db.String(20), unique=True)
+    password = db.Column(db.String(100)) 
+    email = db.Column(db.String(80), unique=True)
+
+    is_confirmed = db.Column(db.Boolean, default=False) # --> NOT REQUIRED FOR THIS PROJECT.
+
+    # is_su = db.Column(db.Boolean, default='False') ---> DEPRECATED.
+    is_admin = db.Column(db.Boolean, default=False)
+
     timestamp = db.Column(db.DateTime, nullable=False, default=localTime())
 
 class LicenseKey(db.Model):
