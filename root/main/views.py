@@ -21,9 +21,14 @@ def tests():
 
         u = User.query.all()
 
-        for i in u:
+        if u:
 
-            print(i)
+            for i in u:
+
+                print(i)
+        else:
+
+            print('NO USERS NIBBA')
 
     return 'SUCCESS'
 
