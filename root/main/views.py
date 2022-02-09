@@ -92,6 +92,7 @@ def reset_db():
 
         print(e)
 
+    logout_user()
     flash('OPERATION DONE. CHECK APP LOGS FOR DETAILES.', 'success')
     return redirect(url_for('main.login'))
 

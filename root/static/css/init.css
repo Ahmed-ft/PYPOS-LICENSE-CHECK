@@ -136,7 +136,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 20px;
-    background: rgba(128, 128, 128, 0.404) !important;
+    background: #ffffffa2 !important;
 }
 
 /* scroll end ///////////////////////////////////////////////////////////// */

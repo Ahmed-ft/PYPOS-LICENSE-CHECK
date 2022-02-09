@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
 
     <meta charset="UTF-8">
@@ -12,16 +13,34 @@
 
 <body>
 
+    <span class="w100 center" style="text-align: center; top: 140px; font-size: 40px; color: white;">PYPOS LICENSE CHECK API - LOGIN</span>
+
     <form style="width: 300px; height: 300px;" class="center flex-c-c-se" action="/login" method="post">
 
-        <span>PYPOS LICENSE CHECK API - LOGIN</span>
-
-        <input type="text" name="username" placeholder="USERNAME" id="">
-        <input type="password" name="password" placeholder="PASSWORD" id="">
+        <input style="padding: 5px 15px;" type="text" name="username" placeholder="USERNAME">
+        <input style="padding: 5px 15px;" type="password" name="password" placeholder="PASSWORD">
 
         <button type="submit" class="btn blue_btn">LOGIN</button>
 
     </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    
+        {% if messages %}
+        
+            {% for category, message in messages %}
+
+            <div id="flash-msg" class="alert alert-{{ category }} flex-c-c">
+
+                <span class="w100 flex-c-c" style="height: 100%;">{{ message }}</span>
+                
+            </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
     
 </body>
 

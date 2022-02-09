@@ -41,6 +41,11 @@
         td {
             text-align: center;
             border: 1px solid black;
+            font-size: 20px;
+        }
+
+        td {
+            padding: 10px;
         }
 
         table {
@@ -49,7 +54,6 @@
     </style>
 
     <script>
-
         $(document).ready(function () {
 
             $('.copy').click(function (e) {
@@ -96,7 +100,7 @@
                         document.execCommand("copy");
                         $temp.remove();
                         alert('AUTH TOKEN COPIED.')
-                   
+
                     },
                     error: () => {
                         alert('error')
@@ -106,7 +110,6 @@
             });
 
         });
-
     </script>
 
     <div class="box-shadow flex-c-se" style="width: 95%; height: 80%; background-color: #ffffff81;">
@@ -166,16 +169,18 @@
 
                     <tr style="background-color: red;">
                         <td>{{ key.status }}</td>
-                        <td>{{ key.key }}</td>
+                        <td class="flex-c-sb" style="padding-left: 5px;"> <span
+                                style="text-align: center; width: 90%;">{{ key.key }}</span> <a href="#" class="btn blue_btn copy"
+                                style="font-size: small; width: auto; height: auto; padding: 3px 7px;">COPY</a> </td>
                     </tr>
 
                     {% else %}
 
                     <tr>
                         <td>{{ key.status }}</td>
-                        <td class="flex-c-sb" style="padding-left: 5px;"> <span class="w100"
-                                style="text-align: center;">{{ key.key }}</span> <a href="#" class="btn blue_btn copy"
-                                style="font-size: small; width: auto; height: auto; padding: 0 3px;">COPY</a> </td>
+                        <td class="flex-c-sb" style="padding-left: 5px;"> <span
+                                style="text-align: center; width: 90%;">{{ key.key }}</span> <a href="#" class="btn blue_btn copy"
+                                style="font-size: small; width: auto; height: auto; padding: 3px 7px;">COPY</a> </td>
                     </tr>
 
                     {% endif %}
